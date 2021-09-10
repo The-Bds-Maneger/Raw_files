@@ -2,7 +2,7 @@
     "latest": {
         "java": "1.17.1",
         "bedrock": "1.17.11.01",
-        "pocketmine": "3.22.5",
+        "pocketmine": "4.0.0-BETA2",
         "spigot": "1.17.1"
     },
     "java": {
@@ -542,6 +542,10 @@
         }
     },
     "pocketmine": {
+        "4.0.0-BETA2": {
+            "url": "https://github.com/pmmp/PocketMine-MP/releases/download/4.0.0-BETA2/PocketMine-MP.phar",
+            "data": "2021/9/10"
+        },
         "3.22.5": {
             "url": "https://github.com/pmmp/PocketMine-MP/releases/download/3.22.5/PocketMine-MP.phar",
             "data": "2021/9/10"
