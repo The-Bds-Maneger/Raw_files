@@ -1,5 +1,7 @@
-if (typeof fetch === "undefined") global.fetch = require("node-fetch");
+#!/usr/bin/env node
+const fetchS = (...args) => import("node-fetch").then(mod => mod.default(...args));
 const UserAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36";
+if (typeof fetch === "undefined") global.fetch = fetchS;
 
 function Fetch_Minecraft_net(url = "https://www.minecraft.net/en-us/download/server/bedrock"){
     return new Promise((resolve, reject)=>{

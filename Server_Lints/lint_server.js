@@ -81,61 +81,74 @@ async function CreateLibZIP(url = "") {
     
     // Get Pre URLs
     console.log("Fetching latest versions to Bedrock...");
-    const bedrock_urls = (await Fetch_Minecraft_net("https://www.minecraft.net/en-us/download/server/bedrock")).get_Urls().filter(d => /bin-/.test(d));
+    try {
+        const bedrock_urls = (await Fetch_Minecraft_net("https://www.minecraft.net/en-us/download/server/bedrock")).get_Urls().filter(d => /bin-/.test(d));
     
-    // Bedrock
-    var url_linux, url_win;
-    const Bedrock_JSON = {
-        x64: {
-            linux: "",
-            win32: ""
-        },
-        aarch64: {
-            linux: "",
-            win32: ""
+        // Bedrock
+        const Bedrock_JSON = {
+            x64: {
+                linux: "",
+                win32: ""
+            },
+            aarch64: {
+                linux: "",
+                win32: ""
+            }
         }
-    }
-    bedrock_urls.forEach(urls => {
-        if (/win/.test(urls)) Bedrock_JSON.x64.win32 = urls;
-        else if (/linux/.test(urls)) {
-            if (/aarch64|arm64|arm/.test(urls)) Bedrock_JSON.aarch64.linux = urls;
-            else Bedrock_JSON.x64.linux = urls;
-        };
-    });
-    const BedrockServerVersion = Bedrock_JSON.x64.linux.replace(/[a-zA-Z:\/\-]/gi, "").replace(/^\.*/gi, "").replace(/\.*$/gi, "").trim();
-    console.log(`Feched latest versions to Bedrock! (${BedrockServerVersion})\n`);
-    new_Server.latest.bedrock = BedrockServerVersion
-    if (!(oldServer.bedrock[BedrockServerVersion])) {
-        await CreateLibZIP(Bedrock_JSON.x64.linux);
-        let data = new Date()
-        new_Server.bedrock[BedrockServerVersion] = {
-            ...Bedrock_JSON,
-            data: `${data.getFullYear()}/${data.getMonth() +1}/${data.getDate()}`
+        bedrock_urls.forEach(urls => {
+            if (/win/.test(urls)) Bedrock_JSON.x64.win32 = urls;
+            else if (/linux/.test(urls)) {
+                if (/aarch64|arm64|arm/.test(urls)) Bedrock_JSON.aarch64.linux = urls;
+                else Bedrock_JSON.x64.linux = urls;
+            };
+        });
+        const BedrockServerVersion = Bedrock_JSON.x64.linux.replace(/[a-zA-Z:\/\-]/gi, "").replace(/^\.*/gi, "").replace(/\.*$/gi, "").trim();
+        console.log(`Feched latest versions to Bedrock! (${BedrockServerVersion})\n`);
+        new_Server.latest.bedrock = BedrockServerVersion
+        if (!(oldServer.bedrock[BedrockServerVersion])) {
+            await CreateLibZIP(Bedrock_JSON.x64.linux);
+            let data = new Date()
+            new_Server.bedrock[BedrockServerVersion] = {
+                ...Bedrock_JSON,
+                data: `${data.getFullYear()}/${data.getMonth() +1}/${data.getDate()}`
+            }
+            console.log(new_Server.bedrock[BedrockServerVersion]);
         }
-        console.log(new_Server.bedrock[BedrockServerVersion]);
+    } catch (err) {
+        console.log("We had an error looking for a new version for Minecraft Bedrock")
+        // console.log(err);
     }
 
-    console.log("Fetching latest versions to Java...");
-    const javaLynx = (await Fetch_Minecraft_net("https://www.minecraft.net/en-us/download/server")).toString();
     // Java
-    const JavaServerVersion = javaLynx.split(/["'<>]|\n|\t/gi).map(a => a.trim()).filter(a => a).filter(a => /[0-9\.]\.jar/.test(a))[0].split(/[a-zA-Z\.]/gi).map(a => a.trim()).filter(a => /[0-9]/.test(a)).join(".");
-    new_Server.latest.java = JavaServerVersion;
-    if (!(oldServer.java[JavaServerVersion])) {
-        let data = new Date()
-        new_Server.java[JavaServerVersion] = {
-            url: javaLynx.split(/["'<>]|\n|\t/gi).map(a => a.trim()).filter(a => a).filter(a => /server*\.jar/.test(a))[0],
-            data: `${data.getFullYear()}/${data.getMonth() +1}/${data.getDate()}`
-        }
-        console.log(new_Server.java[JavaServerVersion]);
+    console.log("Fetching latest versions to Java...");
+    try {
+        const JavaArray = [...(await Fetch_Minecraft_net("https://www.minecraft.net/en-us/download/server")).toString().split(/["'<>]|\n|\t/gi).map(a => a.trim()).filter(a => a)];
+        const JavaServerVersion = JavaArray.filter(a => /[0-9\.]\.jar/.test(a)).map(a => a.split(/[a-zA-Z\.]/gi).map(a => a.trim()).filter(a => /[0-9]/.test(a)).join(".")).filter(a => a);
+        
+        console.log(JavaArray.filter(a => /server.*\.jar/.test(a)));
+        if (JavaServerVersion.length > 0) {
+            new_Server.latest.java = JavaServerVersion[0];
+            if (!(oldServer.java[JavaServerVersion])) {
+                let data = new Date()
+                new_Server.java[JavaServerVersion] = {
+                    url: JavaArray.filter(a => /http[s]:\/\/.*server.*\.jar/.test(a))[0],
+                    data: `${data.getFullYear()}/${data.getMonth() +1}/${data.getDate()}`
+                }
+                console.log(new_Server.java[JavaServerVersion]);
+            }
+            console.log(`Feched latest versions to Java! (${JavaServerVersion})\n`);
+        } else console.log("We had an error looking for a new version for Java");
+    } catch (err) {
+        console.log("We had an error looking for a new version for Java")
+        // console.log(err);
     }
-    console.log(`Feched latest versions to Java! (${JavaServerVersion})\n`);
-    
 
+    // ---------------------------------------------------------------------------------------------------------------------
+    // Pocketmine-MP
     console.log("Fetching latest versions to PocketMine-MP...");
-    const pocketmine_json = await GetJson("https://api.github.com/repos/pmmp/PocketMine-MP/releases");
+    const pocketmine_json = [...await GetJson("https://api.github.com/repos/pmmp/PocketMine-MP/releases")];
     console.log(`Feched latest versions to PocketMine-MP! (${pocketmine_json[0].tag_name})\n`);
     
-    // Pocketmine-MP
     new_Server.latest.pocketmine = pocketmine_json[0].tag_name
     for (let index of pocketmine_json){
         if (!(old_Server_file.includes(index.tag_name))) {
@@ -164,6 +177,11 @@ async function CreateLibZIP(url = "") {
     
     // Create git commit template
     const git_commit_template = ["# Server.json update", ""];
+
+    if (!(new_Server.latest.bedrock)) new_Server.latest.bedrock = oldServer.latest.bedrock;
+    if (!(new_Server.latest.java)) new_Server.latest.java = oldServer.latest.java;
+    if (!(new_Server.latest.pocketmine)) new_Server.latest.pocketmine = oldServer.latest.pocketmine;
+    if (!(new_Server.latest.spigot)) new_Server.latest.spigot = oldServer.latest.spigot;
 
     // Bedrock
     if (oldServer.latest.bedrock === new_Server.latest.bedrock) {
