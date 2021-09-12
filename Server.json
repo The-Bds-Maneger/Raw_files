@@ -6,6 +6,10 @@
         "spigot": "1.17.1"
     },
     "java": {
+        "1.17.1,1.17.1": {
+            "url": "https://launcher.mojang.com/v1/objects/a16d67e5807f57fc4e550299cf20226194497dc2/server.jar",
+            "data": "2021/9/12"
+        },
         "1.17.1": {
             "url": "https://launcher.mojang.com/v1/objects/a16d67e5807f57fc4e550299cf20226194497dc2/server.jar",
             "data": "2021/7/6"
