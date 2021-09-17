@@ -128,15 +128,15 @@ async function CreateLibZIP(url = "") {
         console.log(JavaArray.filter(a => /server.*\.jar/.test(a)));
         if (JavaServerVersion.length > 0) {
             new_Server.latest.java = JavaServerVersion[0];
-            if (!(oldServer.java[JavaServerVersion])) {
+            if (!(oldServer.java[new_Server.latest.java])) {
                 let data = new Date()
-                new_Server.java[JavaServerVersion] = {
+                new_Server.java[new_Server.latest.java] = {
                     url: JavaArray.filter(a => /http[s]:\/\/.*server.*\.jar/.test(a))[0],
                     data: `${data.getFullYear()}/${data.getMonth() +1}/${data.getDate()}`
                 }
-                console.log(new_Server.java[JavaServerVersion]);
+                console.log(new_Server.java[new_Server.latest.java]);
             }
-            console.log(`Feched latest versions to Java! (${JavaServerVersion})\n`);
+            console.log(`Feched latest versions to Java! (${new_Server.latest.java})\n`);
         } else console.log("We had an error looking for a new version for Java");
     } catch (err) {
         console.log("We had an error looking for a new version for Java")
