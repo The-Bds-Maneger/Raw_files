@@ -219,7 +219,10 @@ async function CreateLibZIP(url = "") {
     
     // pocketmine
     for (let PocketMine of Object.getOwnPropertyNames(oldServer.pocketmine)){new_Server.pocketmine[PocketMine] = oldServer.pocketmine[PocketMine]}
-    
+
+    // Dragonfly
+    for (let Dragonfly of Object.getOwnPropertyNames(oldServer.dragonfly)) {new_Server.dragonfly[Dragonfly] = oldServer.dragonfly[Dragonfly]}
+
     // Create git commit template
     const git_commit_template = ["# Server.json update", ""];
 
@@ -227,6 +230,7 @@ async function CreateLibZIP(url = "") {
     if (!(new_Server.latest.java)) new_Server.latest.java = oldServer.latest.java;
     if (!(new_Server.latest.pocketmine)) new_Server.latest.pocketmine = oldServer.latest.pocketmine;
     if (!(new_Server.latest.spigot)) new_Server.latest.spigot = oldServer.latest.spigot;
+    if (!(new_Server.latest.dragonfly)) new_Server.latest.dragonfly = oldServer.latest.dragonfly
 
     // Bedrock
     if (oldServer.latest.bedrock === new_Server.latest.bedrock) {
@@ -272,15 +276,27 @@ async function CreateLibZIP(url = "") {
         console.log(SpigotTextUpdate);
     }
 
+    // Dragonfly
+    if (oldServer.latest.dragonfly === new_Server.latest.dragonfly) {
+        const DgTextUpToDate = `- Dragonfly up to date (${new_Server.latest.dragonfly})\n`;
+        git_commit_template.push(DgTextUpToDate);
+        console.log(DgTextUpToDate);
+    } else {
+        const DgTextUpdate = `- Dragonfly Update ${oldServer.latest.dragonfly} to ${new_Server.latest.dragonfly}`;
+        git_commit_template.push(DgTextUpdate);
+        console.log(DgTextUpdate);
+    }
+
     // Write commit file
     writeFileSync(resolve(__dirname, "../.commit_template.md"), git_commit_template.join("\n"));
-    
+
     // Write Server.json file
     writeFileSync(Server_path, JSON.stringify(new_Server, null, 4));
-    
+
     // Export variables
     exportVariable("pocketmine_version", new_Server.latest.pocketmine);
     exportVariable("java_version", new_Server.latest.java);
     exportVariable("bedrock_version", new_Server.latest.bedrock);
     exportVariable("spigot_version", new_Server.latest.spigot);
+    exportVariable("dragonfly_version", new_Server.latest.dragonfly);
 })();
