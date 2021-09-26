@@ -3,7 +3,8 @@
         "java": "1.17.1",
         "bedrock": "1.17.31.01",
         "pocketmine": "4.0.0-BETA3",
-        "spigot": "1.17.1"
+        "spigot": "1.17.1",
+        "dragonfly": "1.17.30"
     },
     "java": {
         "1.17.1": {
@@ -926,5 +927,6 @@
             "version": "1.4.6",
             "url": "https://getbukkit.org/get/29mixbrJ32rlDGLn8L3dIe4jvkLPdgom"
         }
-    ]
+    ],
+    "dragonfly": {}
 }

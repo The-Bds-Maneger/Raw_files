@@ -71,12 +71,14 @@ async function CreateLibZIP(url = "") {
             java: null,
             bedrock: null,
             pocketmine: null,
-            spigot: null
+            spigot: null,
+            dragonfly: null
         },
         java: {},
         bedrock: {},
         pocketmine: {},
-        spigot: {}
+        spigot: {},
+        dragonfly: {}
     }
     
     // Get Pre URLs
@@ -148,7 +150,7 @@ async function CreateLibZIP(url = "") {
     console.log("Fetching latest versions to PocketMine-MP...");
     const pocketmine_json = [...await GetJson("https://api.github.com/repos/pmmp/PocketMine-MP/releases")];
     console.log(`Feched latest versions to PocketMine-MP! (${pocketmine_json[0].tag_name})\n`);
-    
+
     new_Server.latest.pocketmine = pocketmine_json[0].tag_name
     for (let index of pocketmine_json){
         if (!(old_Server_file.includes(index.tag_name))) {
@@ -160,7 +162,46 @@ async function CreateLibZIP(url = "") {
             console.log(new_Server.pocketmine[index.tag_name]);
         }
     }
-    
+
+    // Dragonfly
+    console.log("Dragonfly Builds");
+    const dragonfly_releases = [...(await GetJson("https://api.github.com/repos/The-Bds-Maneger/Dragonfly_Build/releases"))];
+    new_Server.latest.dragonfly = dragonfly_releases[0].tag_name;
+    const mapped_dragonfly = {}
+    for (let Version of dragonfly_releases) {
+        mapped_dragonfly[Version.tag_name] = {
+            linux: {aarch64: null, armv7: null, amd64: null, i386: null},
+            win32: {aarch64: null, amd64: null, i386: null},
+            darwin: {aarch64: null, amd64: null},
+            android: {aarch64: null, amd64: null}
+        }
+       for (let assents of Version.assets) {
+           if (/linux/.test(assents.name)) {
+               if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.aarch64 = assents.browser_download_url;
+               else if (/arm/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.armv7 = assents.browser_download_url;
+               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.amd64 = assents.browser_download_url;
+               else if (/386/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.i386 = assents.browser_download_url;
+               else console.log("Skip:", assents.name);
+           } else if (/win32/.test(assents.name)) {
+               if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].win32.aarch64 = assents.browser_download_url;
+               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].win32.amd64 = assents.browser_download_url;
+               else if (/386/.test(assents.name)) mapped_dragonfly[Version.tag_name].win32.i386 = assents.browser_download_url;
+               else console.log("Skip:", assents.name);
+           } else if (/darwin/.test(assents.name)) {
+               if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].darwin.aarch64 = assents.browser_download_url;
+               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].darwin.amd64 = assents.browser_download_url;
+               else console.log("Skip:", assents.name);
+           }
+       }
+    }
+    console.log(mapped_dragonfly);
+    for (let DragonflyVersion2 of Object.getOwnPropertyNames(mapped_dragonfly)) {
+        if (!(oldServer.dragonfly)) new_Server.dragonfly = mapped_dragonfly;
+        else {
+            if (!(oldServer.dragonfly[DragonflyVersion2])) new_Server.dragonfly[DragonflyVersion2] = mapped_dragonfly[DragonflyVersion2];
+        }
+    }
+
     // Spigot
     new_Server.spigot = await Spigot_Lint();
     new_Server.latest.spigot = new_Server.spigot[0].version
