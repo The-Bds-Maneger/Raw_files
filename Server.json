@@ -3,7 +3,8 @@
         "java": "1.17.1",
         "bedrock": "1.17.31.01",
         "pocketmine": "4.0.0-BETA3",
-        "spigot": "1.17.1"
+        "spigot": "1.17.1",
+        "dragonfly": "1.17.30"
     },
     "java": {
         "1.17.1": {
@@ -926,5 +927,28 @@
             "version": "1.4.6",
             "url": "https://getbukkit.org/get/29mixbrJ32rlDGLn8L3dIe4jvkLPdgom"
         }
-    ]
+    ],
+    "dragonfly": {
+        "1.17.30": {
+            "linux": {
+                "aarch64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_linux_arm64",
+                "armv7": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_linux_arm",
+                "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_linux_amd64",
+                "i386": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_linux_386"
+            },
+            "win32": {
+                "aarch64": null,
+                "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_win32_amd64.exe",
+                "i386": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_win32_386.exe"
+            },
+            "darwin": {
+                "aarch64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_darwin_arm64",
+                "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_darwin_amd64"
+            },
+            "android": {
+                "aarch64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_android_arm64",
+                "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_android_amd64"
+            }
+        }
+    }
 }
