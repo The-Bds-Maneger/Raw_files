@@ -928,5 +928,27 @@
             "url": "https://getbukkit.org/get/29mixbrJ32rlDGLn8L3dIe4jvkLPdgom"
         }
     ],
-    "dragonfly": {}
+    "dragonfly": {
+        "1.17.30": {
+            "linux": {
+                "aarch64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_linux_arm64",
+                "armv7": null,
+                "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_linux_amd64",
+                "i386": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_linux_386"
+            },
+            "win32": {
+                "aarch64": null,
+                "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_win32_amd64.exe",
+                "i386": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_win32_386.exe"
+            },
+            "darwin": {
+                "aarch64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_darwin_arm64",
+                "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_darwin_amd64"
+            },
+            "android": {
+                "aarch64": null,
+                "amd64": null
+            }
+        }
+    }
 }
