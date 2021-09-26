@@ -946,8 +946,8 @@
                 "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_darwin_amd64"
             },
             "android": {
-                "aarch64": null,
-                "amd64": null
+                "aarch64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_android_arm64",
+                "amd64": "https://github.com/The-Bds-Maneger/Dragonfly_Build/releases/download/1.17.30/Dragonfly_android_amd64"
             }
         }
     }

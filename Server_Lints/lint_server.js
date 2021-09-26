@@ -191,6 +191,10 @@ async function CreateLibZIP(url = "") {
                if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].darwin.aarch64 = assents.browser_download_url;
                else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].darwin.amd64 = assents.browser_download_url;
                else console.log("Skip:", assents.name);
+           } else if (/android/.test(assents.name)) {
+               if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].android.aarch64 = assents.browser_download_url;
+               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].android.amd64 = assents.browser_download_url;
+               else console.log("Skip:", assents.name);
            }
        }
     }
