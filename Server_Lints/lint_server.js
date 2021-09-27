@@ -179,21 +179,21 @@ async function CreateLibZIP(url = "") {
            if (/linux/.test(assents.name)) {
                if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.aarch64 = assents.browser_download_url;
                else if (/arm/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.armv7 = assents.browser_download_url;
-               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.amd64 = assents.browser_download_url;
+               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.x64 = assents.browser_download_url;
                else if (/386/.test(assents.name)) mapped_dragonfly[Version.tag_name].linux.i386 = assents.browser_download_url;
                else console.log("Skip:", assents.name);
            } else if (/win32/.test(assents.name)) {
                if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].win32.aarch64 = assents.browser_download_url;
-               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].win32.amd64 = assents.browser_download_url;
+               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].win32.x64 = assents.browser_download_url;
                else if (/386/.test(assents.name)) mapped_dragonfly[Version.tag_name].win32.i386 = assents.browser_download_url;
                else console.log("Skip:", assents.name);
            } else if (/darwin/.test(assents.name)) {
                if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].darwin.aarch64 = assents.browser_download_url;
-               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].darwin.amd64 = assents.browser_download_url;
+               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].darwin.x64 = assents.browser_download_url;
                else console.log("Skip:", assents.name);
            } else if (/android/.test(assents.name)) {
                if (/arm64/.test(assents.name)) mapped_dragonfly[Version.tag_name].android.aarch64 = assents.browser_download_url;
-               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].android.amd64 = assents.browser_download_url;
+               else if (/amd64/.test(assents.name)) mapped_dragonfly[Version.tag_name].android.x64 = assents.browser_download_url;
                else console.log("Skip:", assents.name);
            }
        }
