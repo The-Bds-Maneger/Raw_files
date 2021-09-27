@@ -170,10 +170,10 @@ async function CreateLibZIP(url = "") {
     const mapped_dragonfly = {}
     for (let Version of dragonfly_releases) {
         mapped_dragonfly[Version.tag_name] = {
-            linux: {aarch64: null, armv7: null, amd64: null, i386: null},
-            win32: {aarch64: null, amd64: null, i386: null},
-            darwin: {aarch64: null, amd64: null},
-            android: {aarch64: null, amd64: null}
+            linux: {aarch64: null, armv7: null, x64: null, i386: null},
+            win32: {aarch64: null, x64: null, i386: null},
+            darwin: {aarch64: null, x64: null},
+            android: {aarch64: null, x64: null}
         }
        for (let assents of Version.assets) {
            if (/linux/.test(assents.name)) {
