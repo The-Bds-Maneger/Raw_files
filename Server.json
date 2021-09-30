@@ -1,7 +1,7 @@
 {
     "latest": {
         "java": "1.17.1",
-        "bedrock": "1.17.31.01",
+        "bedrock": "1.17.32.02",
         "pocketmine": "4.0.0-BETA3",
         "spigot": "1.17.1",
         "dragonfly": "1.17.30"
@@ -261,6 +261,17 @@
         }
     },
     "bedrock": {
+        "1.17.32.02": {
+            "x64": {
+                "linux": "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.17.32.02.zip",
+                "win32": "https://minecraft.azureedge.net/bin-win/bedrock-server-1.17.32.02.zip"
+            },
+            "aarch64": {
+                "linux": "",
+                "win32": ""
+            },
+            "data": "2021/9/30"
+        },
         "1.17.31.01": {
             "x64": {
                 "linux": "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.17.31.01.zip",
