@@ -2,7 +2,7 @@
     "latest": {
         "java": "1.17.1",
         "bedrock": "1.17.34.02",
-        "pocketmine": "4.0.0-BETA4",
+        "pocketmine": "3.24.0",
         "spigot": "1.17.1",
         "dragonfly": "1.17.30"
     },
@@ -598,6 +598,10 @@
         }
     },
     "pocketmine": {
+        "3.24.0": {
+            "url": "https://github.com/pmmp/PocketMine-MP/releases/download/3.24.0/PocketMine-MP.phar",
+            "data": "2021/10/9"
+        },
         "4.0.0-BETA4": {
             "url": "https://github.com/pmmp/PocketMine-MP/releases/download/4.0.0-BETA4/PocketMine-MP.phar",
             "data": "2021/10/6"
